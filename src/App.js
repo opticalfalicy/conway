@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import Sidebar from "./Sidebar";
 import Life from "./cca.js";
 import "./App.css";
 
-const canvasWidth = window.innerWidth;
+const canvasWidth = window.innerWidth - 90;
 const canvasHeight = window.innerHeight;
 
 const COLORS = [
@@ -109,7 +110,7 @@ class LifeApp extends Component {
    */
   render() {
     return (
-      <div>
+      <div className="canvas">
         <LifeCanvas width={canvasWidth} height={canvasHeight} />
       </div>
     );
@@ -124,8 +125,11 @@ class App extends Component {
    * Render
    */
   render() {
+    // let winWidth = canvasWidth;
+    // let winHeight = canvasHeight;
     return (
       <div className="App">
+        <Sidebar />
         <LifeApp />
       </div>
     );
