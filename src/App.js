@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 import Life from "./cca.js";
 import "./App.css";
 
@@ -117,10 +117,25 @@ class LifeApp extends Component {
   }
 }
 
+class Sidebar extends Component {
+  render() {
+    let sideHeight = window.innerHeight;
+    return (
+      <div className="sb-main" style={{ height: sideHeight }}>
+        <button className="sb-b sb-bOne">One</button>
+        <button className="sb-b sb-bTwo">Two</button>
+        <button className="sb-b sb-bOne">Three</button>
+      </div>
+    );
+  }
+}
+
 /**
  * Outer App component
  */
 class App extends Component {
+  onClickOne = () => {};
+
   /**
    * Render
    */
