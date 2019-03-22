@@ -1,5 +1,5 @@
 /**
- * Implemention of a Life
+ * Implemention of a Vert
  */
 
 const MODULO = 5;
@@ -20,9 +20,9 @@ function Array2D(width, height) {
 }
 
 /**
- * Life class
+ * Vert class
  */
-class Life {
+class Vert {
   /**
    * Constructor
    */
@@ -214,4 +214,4 @@ class Life {
   }
 }
 
-export default Life;
+export default Vert;

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 // import Sidebar from "./Sidebar";
-import Life from "./cca.js";
+import Life from "./life.js";
+import Vert from "./vert.js";
+import Box from "./box.js";
+
 import "./App.css";
 
 const canvasWidth = window.innerWidth - 90;
@@ -27,7 +30,12 @@ class LifeCanvas extends Component {
   constructor(props) {
     super(props);
 
-    this.life = new Life(canvasWidth, canvasHeight);
+    if (this.props.lifeSelect === "life") {
+      this.life = new Life(canvasWidth, canvasHeight);
+    }
+    if (this.props.lifeSelect === "vert") {
+      this.life = new Vert(canvasWidth, canvasHeight);
+    }
     // this.life.randomize();
   }
 
@@ -36,6 +44,7 @@ class LifeCanvas extends Component {
    */
   componentDidMount() {
     requestAnimationFrame(() => this.animFrame());
+    // console.log("test", this.props.test);
   }
 
   /**
@@ -111,30 +120,56 @@ class LifeApp extends Component {
   render() {
     return (
       <div className="canvas">
-        <LifeCanvas width={canvasWidth} height={canvasHeight} />
+        <LifeCanvas
+          width={canvasWidth}
+          height={canvasHeight}
+          lifeSelect={this.props.lifeSelect}
+        />
       </div>
     );
   }
 }
 
-class Sidebar extends Component {
-  render() {
-    let sideHeight = window.innerHeight;
-    return (
-      <div className="sb-main" style={{ height: sideHeight }}>
-        <button className="sb-b sb-bOne">One</button>
-        <button className="sb-b sb-bTwo">Two</button>
-        <button className="sb-b sb-bOne">Three</button>
-      </div>
-    );
-  }
-}
+// class Sidebar extends Component {
+//   render() {
+//     let sideHeight = window.innerHeight;
+//     return (
+//       <div className="sb-main" style={{ height: sideHeight }}>
+//         <button className="sb-b sb-bOne">One</button>
+//         <button className="sb-b sb-bTwo">Two</button>
+//         <button className="sb-b sb-bOne">Three</button>
+//       </div>
+//     );
+//   }
+// }
 
 /**
  * Outer App component
  */
 class App extends Component {
-  onClickOne = () => {};
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lifeSelect: "life"
+    };
+  }
+
+  onSelect = e => {
+    console.log(e.target.lifeval);
+    if (e.target.val === "1") {
+      this.setState = {
+        lifeSelect: "life"
+      };
+      console.log("sel 1");
+    }
+    if (e.target.val === "2") {
+      this.setState = {
+        lifeSelect: "vert"
+      };
+      console.log("sel 2");
+    }
+  };
 
   /**
    * Render
@@ -142,10 +177,23 @@ class App extends Component {
   render() {
     // let winWidth = canvasWidth;
     // let winHeight = canvasHeight;
+    let sideHeight = window.innerHeight;
     return (
       <div className="App">
-        <Sidebar />
-        <LifeApp />
+        {/* <Sidebar> */}
+        <div className="sb-main" style={{ height: sideHeight }}>
+          <button className="sb-b sb-bOne" onClick={this.onSelect} lifeval="1">
+            One
+          </button>
+          <button className="sb-b sb-bTwo" val="2">
+            Two
+          </button>
+          <button className="sb-b sb-bOne" val="3">
+            Three
+          </button>
+        </div>
+        {/* </Sidebar> */}
+        <LifeApp lifeSelect={this.state.lifeSelect} />
       </div>
     );
   }
